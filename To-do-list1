@@ -1,0 +1,50 @@
+todo_list = []
+
+def show_menu():
+    print("\n--- TO-DO LIST MENU ---")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Mark Task as Completed")
+    print("4. Delete Task")
+    print("5. Exit")
+
+while True:
+    show_menu()
+    choice = input("Enter your choice (1-5): ")
+
+    if choice == "1":
+        task = input("Enter the task: ")
+        todo_list.append({"task": task, "completed": False})
+        print("Task added!")
+
+    elif choice == "2":
+        print("\n--- YOUR TASKS ---")
+        if not todo_list:
+            print("No tasks found.")
+        else:
+            for index, item in enumerate(todo_list):
+                status = "✔" if item["completed"] else "❌"
+                print(f"{index + 1}. {item['task']} [{status}]")
+
+    elif choice == "3":
+        task_num = int(input("Enter task number to mark complete: ")) - 1
+        if 0 <= task_num < len(todo_list):
+            todo_list[task_num]["completed"] = True
+            print("Task marked as completed.")
+        else:
+            print("Invalid task number.")
+
+    elif choice == "4":
+        task_num = int(input("Enter task number to delete: ")) - 1
+        if 0 <= task_num < len(todo_list):
+            deleted_task = todo_list.pop(task_num)
+            print(f"Deleted task: {deleted_task['task']}")
+        else:
+            print("Invalid task number.")
+
+    elif choice == "5":
+        print("Exiting the program. Goodbye!")
+        break
+
+    else:
+        print("Invalid choice. Try again.")
